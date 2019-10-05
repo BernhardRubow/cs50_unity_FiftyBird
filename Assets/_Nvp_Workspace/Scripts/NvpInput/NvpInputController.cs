@@ -10,8 +10,12 @@ public class NvpInputController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("On Player jumps events thrown");
-            NvpEventBus.Events(GameEvents.OnPlayerJumps).TriggerEvent(this, null);
+            NvpEventBus.Events(GameEvents.OnPlayerJumps).TriggerEvent(null, null);
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            NvpEventBus.Events(GameEvents.OnPlayerJumps).TriggerEvent(null, null);
         }
     }
 }

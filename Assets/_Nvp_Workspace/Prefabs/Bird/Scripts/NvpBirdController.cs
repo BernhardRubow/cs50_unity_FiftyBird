@@ -8,14 +8,22 @@ public class NvpBirdController : MonoBehaviour
 {
     // +++ fields +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     [SerializeField] private float _jumpForce;
+    [SerializeField] private Vector3 _gravity = new Vector3(0f, -9.81f, 0f);
 
-    private Rigidbody2D _rb;
+    private Vector3 _velocity = Vector3.zero;
+
+
 
 
     // +++ life cycle +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void Start()
     {
-        _rb = this.GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        _velocity += _gravity * Time.deltaTime;
+        this.transform.position = this.transform.position + _velocity;
     }
 
     private void OnEnable()
@@ -28,15 +36,15 @@ public class NvpBirdController : MonoBehaviour
         NvpEventBus.Events(GameEvents.OnPlayerJumps).GameEventHandler -= OnPlayerJumps;
     }
 
-       
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
+    }
 
     // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void OnPlayerJumps(object sender, EventArgs e)
     {
-        Debug.Log("OnPlayerJumps received");
-        _rb.velocity = Vector2.zero;
-        _rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+        _velocity = new Vector3(0f, _jumpForce, 0f);        
     }
 
 }
