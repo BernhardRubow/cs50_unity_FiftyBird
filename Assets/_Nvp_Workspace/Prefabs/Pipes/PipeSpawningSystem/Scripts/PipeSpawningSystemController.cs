@@ -9,14 +9,28 @@ public class PipeSpawningSystemController : MonoBehaviour
     [SerializeField] private float _spawningTimer;
     [SerializeField] private Transform _pipeSpawnPoint;
 
+    private IHeightGenerator _spawnPositionCalculator;
+    private IGapSizeGenerator _gapSizeGenerator;
+    private float _lastHeight;
+
 
 
 
     // +++ life cycle +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    private void Start()
+    {
+        // TODO: implement Factory
+        _spawnPositionCalculator = new RandomHeightGenerator();
+        _spawnPositionCalculator.SetStartPosition(_pipeSpawnPoint.position);
+
+        _gapSizeGenerator = new RandomGapSizeGenerator();
+        _gapSizeGenerator.SetInitialGap(5f);
+
+    }
+
     private void Update()
     {
         CheckPipeSpawnCondition();
-
     }
 
 
@@ -31,10 +45,14 @@ public class PipeSpawningSystemController : MonoBehaviour
             _spawningTimer = 0;
 
             var pipe = NvpPipePool.GetPooledItem();
+            var nextSpawnLocation = _spawnPositionCalculator.GetNextSpawnPosition();
+            var nextGapSize = _gapSizeGenerator.GetNextGap();
 
-            pipe.transform.position = _pipeSpawnPoint.position;
+            pipe.transform.position = nextSpawnLocation;
+            pipe.GetComponent<NvpPripeController>().SetGap(nextGapSize);
             pipe.gameObject.SetActive(true);
-
         }
     }
+
+    
 }

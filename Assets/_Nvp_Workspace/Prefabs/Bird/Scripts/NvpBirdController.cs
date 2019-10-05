@@ -17,25 +17,17 @@ public class NvpBirdController : MonoBehaviour
 
 
     // +++ life cycle +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    private void Start()
-    {
-    }
-
     private void Update()
     {
+        if (Input.GetMouseButtonUp(0))
+        {
+            _velocity = new Vector3(0f, _jumpForce, 0f);
+        }
+
         _velocity += _gravity * Time.deltaTime;
         this.transform.position = this.transform.position + _velocity;
     }
-
-    private void OnEnable()
-    {
-        NvpEventBus.Events(GameEvents.OnPlayerJumps).GameEventHandler += OnPlayerJumps;    
-    }
-
-    private void OnDisable()
-    {
-        NvpEventBus.Events(GameEvents.OnPlayerJumps).GameEventHandler -= OnPlayerJumps;
-    }
+      
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -46,10 +38,10 @@ public class NvpBirdController : MonoBehaviour
         }
     }
 
+
+
+
     // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    private void OnPlayerJumps(object sender, EventArgs e)
-    {
-        _velocity = new Vector3(0f, _jumpForce, 0f);        
-    }
+   
 
 }

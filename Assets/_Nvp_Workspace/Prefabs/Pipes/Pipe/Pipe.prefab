@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 200
+  _topPipe: {fileID: 6107753695658232979}
+  _bottomPipe: {fileID: 4653977454691001020}
 --- !u!1 &795034459661856518
 GameObject:
   m_ObjectHideFlags: 0

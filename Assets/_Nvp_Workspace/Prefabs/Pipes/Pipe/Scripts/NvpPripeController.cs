@@ -7,6 +7,8 @@ public class NvpPripeController : MonoBehaviour, IPoolItem
 {
     // +++ fields +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     [SerializeField] private float _moveSpeed;
+    [SerializeField] private Transform _topPipe;
+    [SerializeField] private Transform _bottomPipe;
 
     private System.Action<GameObject> _returnToPoolAction;
     private Transform _t;
@@ -43,5 +45,11 @@ public class NvpPripeController : MonoBehaviour, IPoolItem
     void ReturnToPool()
     {
         _returnToPoolAction(this.gameObject);
+    }
+
+    public void SetGap(float gap)
+    {
+        _topPipe.transform.localPosition = new Vector3(0f, gap / 2f, 0f);
+        _bottomPipe.transform.localPosition = new Vector3(0f, -gap / 2f, 0f);
     }
 }
