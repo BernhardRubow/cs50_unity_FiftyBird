@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using nvp.events;
 using System;
+using nvp.events;
 
 public class NvpBirdController : MonoBehaviour
 {
@@ -38,7 +39,11 @@ public class NvpBirdController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.name);
+        if(collision.tag == "ScoreTrigger")
+        {
+            var ea = new Vector3EventArgs { Value = this.transform.position };
+            NvpEventBus.Events(GameEvents.OnPlayerScores).TriggerEvent(this, ea);
+        }
     }
 
     // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

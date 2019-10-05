@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f2e5d329f9a224e9fe5802e9a20189, type: 3}
+  m_Name: ScoreAudioEvent
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: b32fd62ac0f7c3a459efafeb37921b2a, type: 3}
+  - {fileID: 8300000, guid: b7b22880f94356e4f8b58d33eace3b89, type: 3}
+  volume:
+    minValue: 0.93588805
+    maxValue: 1
+  pitch:
+    minValue: 0.9285188
+    maxValue: 1.0464259

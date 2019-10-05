@@ -3,6 +3,7 @@
     public enum GameEvents
     {
         // in game evens
-        OnPlayerJumps
+        OnPlayerJumps,
+        OnPlayerScores
     }
 }
