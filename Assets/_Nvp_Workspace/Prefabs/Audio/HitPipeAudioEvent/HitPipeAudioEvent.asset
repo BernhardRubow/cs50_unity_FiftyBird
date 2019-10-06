@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f2e5d329f9a224e9fe5802e9a20189, type: 3}
   m_Name: HitPipeAudioEvent
   m_EditorClassIdentifier: 
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: ddb906ed5db4b854794b177672cd0a8b, type: 3}
   volume:
-    minValue: 0
-    maxValue: 0
+    minValue: 0.90309125
+    maxValue: 1
   pitch:
-    minValue: 0
-    maxValue: 0
+    minValue: 0.94407797
+    maxValue: 1.0413339
