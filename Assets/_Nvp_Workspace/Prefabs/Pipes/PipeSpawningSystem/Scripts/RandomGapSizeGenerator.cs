@@ -10,7 +10,7 @@ public class RandomGapSizeGenerator : IGapSizeGenerator
         _lastGapSize += Random.Range(-2f, 2f);
         _lastGapSize = Mathf.Clamp(_lastGapSize, 3.9f, 4.5f);
 
-        Debug.LogFormat("last gap size: {0}", _lastGapSize);
+        //Debug.LogFormat("last gap size: {0}", _lastGapSize);
         return _lastGapSize;
     }
 

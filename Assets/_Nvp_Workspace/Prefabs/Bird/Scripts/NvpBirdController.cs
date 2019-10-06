@@ -31,10 +31,15 @@ public class NvpBirdController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "ScoreTrigger")
+        var ea = new Vector3EventArgs { Value = this.transform.position };
+        if (collision.tag == "ScoreTrigger")
         {
-            var ea = new Vector3EventArgs { Value = this.transform.position };
             NvpEventBus.Events(GameEvents.OnPlayerScores).TriggerEvent(this, ea);
+        }
+
+        if (collision.tag == "Pipe")
+        {
+            NvpEventBus.Events(GameEvents.OnPlayerHitsPipe).TriggerEvent(this, ea);
         }
     }
 

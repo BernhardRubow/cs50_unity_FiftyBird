@@ -4,6 +4,7 @@
     {
         // in game evens
         OnPlayerJumps,
-        OnPlayerScores
+        OnPlayerScores,
+        OnPlayerHitsPipe
     }
 }

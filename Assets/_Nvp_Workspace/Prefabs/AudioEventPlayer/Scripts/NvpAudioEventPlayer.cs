@@ -8,8 +8,13 @@ public class NvpAudioEventPlayer : MonoBehaviour
     // +++ fields +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     [SerializeField] private NvpAudioEvent _audioEvent;
     [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private GameEvents _subscribedAudioEvent;
+    [SerializeField] private bool _playOnlyOnTime;
+
+    private bool _played;
 
 
+    
 
 
     // +++ life cycle +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -20,12 +25,12 @@ public class NvpAudioEventPlayer : MonoBehaviour
 
     private void OnEnable()
     {
-        NvpEventBus.Events(GameEvents.OnPlayerScores).GameEventHandler += OnPlayerScores;
+        NvpEventBus.Events(_subscribedAudioEvent).GameEventHandler += OnPlayerScores;
     }
 
     private void OnDisable()
     {
-        NvpEventBus.Events(GameEvents.OnPlayerScores).GameEventHandler -= OnPlayerScores;
+        NvpEventBus.Events(_subscribedAudioEvent).GameEventHandler -= OnPlayerScores;
     }
 
 
@@ -34,9 +39,12 @@ public class NvpAudioEventPlayer : MonoBehaviour
     // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void OnPlayerScores(object sender, System.EventArgs e)
     {
+        if (_playOnlyOnTime && _played) return;
+
         var ea = (Vector3EventArgs)e;
         this.transform.position = ea.Value;
         _audioEvent.Play(_audioSource);
+        _played = true;
     }
 
 }
