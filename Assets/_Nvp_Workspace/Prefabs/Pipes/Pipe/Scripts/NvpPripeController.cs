@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using nvp.events;
 
 public class NvpPripeController : MonoBehaviour, IPoolItem
 {
@@ -12,6 +13,7 @@ public class NvpPripeController : MonoBehaviour, IPoolItem
 
     private System.Action<GameObject> _returnToPoolAction;
     private Transform _t;
+    private bool _paused;
     
 
     // +++ life cycle +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -22,6 +24,8 @@ public class NvpPripeController : MonoBehaviour, IPoolItem
 
     private void Update()
     {
+        if (_paused) return;
+
         _t.Translate(Vector3.left * _moveSpeed * Time.deltaTime, Space.World);
 
         if (_t.position.x < -1000f)
@@ -30,12 +34,30 @@ public class NvpPripeController : MonoBehaviour, IPoolItem
         }
     }
 
+    private void OnEnable()
+    {
+        NvpEventBus.Events(GameEvents.OnPlayerHitsPipe).GameEventHandler += OnPlayerHitsPipe;
+    }
+
+    private void OnDisable()
+    {
+        NvpEventBus.Events(GameEvents.OnPlayerHitsPipe).GameEventHandler -= OnPlayerHitsPipe;
+    }
 
 
     // +++ IPoolItem implementation +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public void SetReturnAction(Action<GameObject> returnToPoolAction)
     {
         if (_returnToPoolAction == null) _returnToPoolAction = returnToPoolAction;
+    }
+
+
+
+
+    // +++ eventhandler +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    private void OnPlayerHitsPipe(object sender, EventArgs e)
+    {
+        _paused = true;
     }
 
 
