@@ -1,15 +1,8 @@
-public abstract class NvpGameState
+public interface INvpGameState
 {
-    // +++ abstact fields +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    public System.Action Update;
+    void Enter();
 
+    void Update();
 
-    // +++ abstract methods +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    public abstract void EnterState();
-
-    public abstract void UpdateState();
-
-    public abstract void ExitState();
-    
-    
+    void Exit();    
 }

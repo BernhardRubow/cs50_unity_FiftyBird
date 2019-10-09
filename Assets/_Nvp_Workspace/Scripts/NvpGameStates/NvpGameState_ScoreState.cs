@@ -1,10 +1,8 @@
-using nvp.events;
-using UnityEngine;
-
-public class NvpGameState_TitleState : INvpGameState{
+﻿public class NvpGameState_ScoreState : INvpGameState
+{
 
     public void Enter()
-    {
+    {        
     }
 
     public void Update()
@@ -13,6 +11,5 @@ public class NvpGameState_TitleState : INvpGameState{
 
     public void Exit()
     {
-
     }
 }

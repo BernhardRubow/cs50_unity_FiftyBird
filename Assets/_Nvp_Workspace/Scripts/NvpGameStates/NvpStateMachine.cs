@@ -5,8 +5,8 @@ using nvp.events;
 public class NvpStateMachine : System.IDisposable {
 
     // +++ fields +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    public NvpGameStatesEnum currentStateEnum = NvpGameStatesEnum.Start;
-    public Dictionary<NvpGameStatesEnum, NvpGameState> gameStates;
+    public NvpGameStatesEnum currentStateEnum = NvpGameStatesEnum.Idle;
+    public Dictionary<NvpGameStatesEnum, INvpGameState> gameStates;
 
 
 
@@ -40,8 +40,8 @@ public class NvpStateMachine : System.IDisposable {
     // +++ private class methods ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     void DoStateTransition(NvpGameStatesEnum from, NvpGameStatesEnum to)
     {
-        gameStates[from].ExitState();
+        gameStates[from].Exit();
         currentStateEnum = to;
-        gameStates[to].EnterState();
+        gameStates[to].Enter();
     }
 }

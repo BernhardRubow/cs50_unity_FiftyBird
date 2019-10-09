@@ -5,17 +5,16 @@ public class NvpStateMachine_Builder{
 
     public NvpStateMachine_Builder(){
         _nvpStateMachine = new NvpStateMachine();
-        _nvpStateMachine.gameStates = new Dictionary<NvpGameStatesEnum, NvpGameState>();
+        _nvpStateMachine.gameStates = new Dictionary<NvpGameStatesEnum, INvpGameState>();
     }
 
-    public NvpStateMachine_Builder AddGameState(NvpGameStatesEnum stateEnumName, NvpGameState stateClass){
+    public NvpStateMachine_Builder AddGameState(NvpGameStatesEnum stateEnumName, INvpGameState stateClass){
         _nvpStateMachine.gameStates.Add(stateEnumName, stateClass);
         return this;
     }
 
     public NvpStateMachine_Builder SetStartState(NvpGameStatesEnum stateEnumName){
         _nvpStateMachine.currentStateEnum = stateEnumName;
-        _nvpStateMachine.gameStates[stateEnumName].Update = _nvpStateMachine.gameStates[stateEnumName].EnterState;
         return this;
     }
 

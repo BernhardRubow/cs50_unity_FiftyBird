@@ -16,8 +16,11 @@ public class GameController : MonoBehaviour
     private void OnEnable()
     {
         _nvpStateMachine = new NvpStateMachine_Builder()
-            .AddGameState(NvpGameStatesEnum.Start, new NvpGameState_Start())
-            .SetStartState(NvpGameStatesEnum.Start)
+            .AddGameState(NvpGameStatesEnum.Idle, new NvpGameState_IdleState())
+            .AddGameState(NvpGameStatesEnum.Title, new NvpGameState_TitleState())
+            .AddGameState(NvpGameStatesEnum.CountDown, new NvpGameState_CountDownState())
+            .AddGameState(NvpGameStatesEnum.Play, new NvpGameState_PlayState())
+            .AddGameState(NvpGameStatesEnum.Score, new NvpGameState_ScoreState())
             .Build();
     }
 

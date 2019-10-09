@@ -1,4 +1,7 @@
 public enum NvpGameStatesEnum {
-    Start,
     Idle,
+    Title,
+    CountDown,
+    Play,
+    Score
 }
