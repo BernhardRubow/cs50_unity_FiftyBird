@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using nvp.events;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +14,7 @@ public class PipeSpawningSystemController : MonoBehaviour
     private IHeightGenerator _spawnPositionCalculator;
     private IGapSizeGenerator _gapSizeGenerator;
     private float _lastHeight;
+    private bool _paused;
 
 
 
@@ -30,7 +33,28 @@ public class PipeSpawningSystemController : MonoBehaviour
 
     private void Update()
     {
+        if (_paused) return;
         CheckPipeSpawnCondition();
+    }
+
+    private void OnEnable()
+    {
+        NvpEventBus.Events(GameEvents.OnPlayerHitsPipe).GameEventHandler += OnPlayerHitsPipe;
+    }
+
+    private void OnDisable()
+    {
+        NvpEventBus.Events(GameEvents.OnPlayerHitsPipe).GameEventHandler -= OnPlayerHitsPipe;
+    }
+
+
+
+    
+    // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    private void OnPlayerHitsPipe(object sender, EventArgs e)
+    {
+        _paused = true;
     }
 
 
