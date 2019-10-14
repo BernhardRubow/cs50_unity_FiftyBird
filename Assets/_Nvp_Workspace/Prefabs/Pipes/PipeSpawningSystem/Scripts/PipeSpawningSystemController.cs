@@ -39,12 +39,12 @@ public class PipeSpawningSystemController : MonoBehaviour
 
     private void OnEnable()
     {
-        NvpEventBus.Events(GameEvents.OnPlayerHitsPipe).GameEventHandler += OnPlayerHitsPipe;
+        NvpEventBus.Events(GameEvents.OnPauseGame).GameEventHandler += OnPlayerHitsPipe;
     }
 
     private void OnDisable()
     {
-        NvpEventBus.Events(GameEvents.OnPlayerHitsPipe).GameEventHandler -= OnPlayerHitsPipe;
+        NvpEventBus.Events(GameEvents.OnPauseGame).GameEventHandler -= OnPlayerHitsPipe;
     }
 
 
@@ -73,7 +73,7 @@ public class PipeSpawningSystemController : MonoBehaviour
             var nextGapSize = _gapSizeGenerator.GetNextGap();
 
             pipe.transform.position = nextSpawnLocation;
-            pipe.GetComponent<NvpPripeController>().SetGap(nextGapSize);
+            pipe.GetComponent<NvpPipeController>().SetGap(nextGapSize);
             pipe.gameObject.SetActive(true);
         }
     }

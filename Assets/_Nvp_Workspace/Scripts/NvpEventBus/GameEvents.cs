@@ -5,6 +5,9 @@
         // in game evens
         OnPlayerJumps,
         OnPlayerScores,
-        OnPlayerHitsPipe
+        OnPlayerHitsPipe,
+        OnPauseGame,
+        OnChangeGameState,
+        OnShowScreen
     }
 }

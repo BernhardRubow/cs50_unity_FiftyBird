@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using nvp.events;
 
-public class NvpPripeController : MonoBehaviour, IPoolItem
+public class NvpPipeController : MonoBehaviour, IPoolItem
 {
     // +++ fields +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     [SerializeField] private float _moveSpeed;
@@ -36,12 +36,12 @@ public class NvpPripeController : MonoBehaviour, IPoolItem
 
     private void OnEnable()
     {
-        NvpEventBus.Events(GameEvents.OnPlayerHitsPipe).GameEventHandler += OnPlayerHitsPipe;
+        NvpEventBus.Events(GameEvents.OnPauseGame).GameEventHandler += OnPlayerHitsPipe;
     }
 
     private void OnDisable()
     {
-        NvpEventBus.Events(GameEvents.OnPlayerHitsPipe).GameEventHandler -= OnPlayerHitsPipe;
+        NvpEventBus.Events(GameEvents.OnPauseGame).GameEventHandler -= OnPlayerHitsPipe;
     }
 
 

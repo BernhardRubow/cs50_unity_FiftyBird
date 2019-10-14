@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     // +++ fields ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private NvpStateMachine _nvpStateMachine;
+    public GameObject birdPrefab;
 
 
 
@@ -17,11 +18,13 @@ public class GameController : MonoBehaviour
     {
         _nvpStateMachine = new NvpStateMachine_Builder()
             .AddGameState(NvpGameStatesEnum.Idle, new NvpGameState_IdleState())
-            .AddGameState(NvpGameStatesEnum.Title, new NvpGameState_TitleState())
+            .AddGameState(NvpGameStatesEnum.Title, new NvpGameState_TitleState(birdPrefab))
             .AddGameState(NvpGameStatesEnum.CountDown, new NvpGameState_CountDownState())
             .AddGameState(NvpGameStatesEnum.Play, new NvpGameState_PlayState())
             .AddGameState(NvpGameStatesEnum.Score, new NvpGameState_ScoreState())
             .Build();
+
+        _nvpStateMachine.DoStateTransition(NvpGameStatesEnum.Title);
     }
 
     private void OnDisable()

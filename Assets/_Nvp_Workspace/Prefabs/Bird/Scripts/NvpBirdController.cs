@@ -12,6 +12,7 @@ public class NvpBirdController : MonoBehaviour
     [SerializeField] private Vector3 _gravity = new Vector3(0f, -9.81f, 0f);
 
     private Vector3 _velocity = Vector3.zero;
+    private bool _paused = false;
 
 
 
@@ -19,6 +20,8 @@ public class NvpBirdController : MonoBehaviour
     // +++ life cycle +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void Update()
     {
+        if (_paused) return;
+
         if (Input.GetMouseButtonUp(0))
         {
             _velocity = new Vector3(0f, _jumpForce, 0f);
@@ -40,13 +43,25 @@ public class NvpBirdController : MonoBehaviour
         if (collision.tag == "Pipe")
         {
             NvpEventBus.Events(GameEvents.OnPlayerHitsPipe).TriggerEvent(this, ea);
+            NvpEventBus.Events(GameEvents.OnPauseGame).TriggerEvent(this, null);
         }
     }
 
+    private void OnEnable()
+    {
+        NvpEventBus.Events(GameEvents.OnPauseGame).GameEventHandler += OnPauseGame;
+    }
 
+    private void OnDisable()
+    {
+        NvpEventBus.Events(GameEvents.OnPauseGame).GameEventHandler -= OnPauseGame;
+    }
 
 
     // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-   
+    private void OnPauseGame(object sender, EventArgs e)
+    {
+        _paused = true;
+    }
 
 }

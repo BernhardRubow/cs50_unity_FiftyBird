@@ -14,14 +14,15 @@ public class NvpStateMachine : System.IDisposable {
     // +++ life cycle +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public NvpStateMachine()
     {
-        
+        NvpEventBus.Events(GameEvents.OnChangeGameState).GameEventHandler += OnGameStateChanged;
     }
 
 
     public void Dispose()
     {
-       
+        NvpEventBus.Events(GameEvents.OnChangeGameState).GameEventHandler -= OnGameStateChanged;
     }
+
 
     public void Update()
     {
@@ -31,16 +32,20 @@ public class NvpStateMachine : System.IDisposable {
 
 
 
-    // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //// +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    private void OnGameStateChanged(object sender, EventArgs e)
+    {
+        var ea = (StateTransitionEventArgs)e;
+        DoStateTransition(ea.Value);
+    }
+
     
 
 
-
-
     // +++ private class methods ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    void DoStateTransition(NvpGameStatesEnum from, NvpGameStatesEnum to)
+    public void DoStateTransition(NvpGameStatesEnum to)
     {
-        gameStates[from].Exit();
+        gameStates[currentStateEnum].Exit();
         currentStateEnum = to;
         gameStates[to].Enter();
     }
