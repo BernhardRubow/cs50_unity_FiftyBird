@@ -299,6 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   birdPrefab: {fileID: 4542109072283179888, guid: 3e3c2a0187fc3f543bf73e81bbace305,
     type: 3}
+  Score: 0
 --- !u!20 &1636382638 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 963194227, guid: e7fa883d42a7a924aa00ea3202188dce,
@@ -726,17 +727,17 @@ PrefabInstance:
     - target: {fileID: 3780994520651314238, guid: 66d0b66ba4c2a8b4ea6e94bedb50bf84,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 269.96918
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3780994520651314238, guid: 66d0b66ba4c2a8b4ea6e94bedb50bf84,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 79.19726
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3780994520651314238, guid: 66d0b66ba4c2a8b4ea6e94bedb50bf84,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -232.25
+      value: -98
       objectReference: {fileID: 0}
     - target: {fileID: 3780994520651314238, guid: 66d0b66ba4c2a8b4ea6e94bedb50bf84,
         type: 3}

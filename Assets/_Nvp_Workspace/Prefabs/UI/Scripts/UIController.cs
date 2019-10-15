@@ -27,12 +27,12 @@ public class UIController : MonoBehaviour
 
     private void OnEnable()
     {
-        NvpEventBus.Events(GameEvents.OnShowScreen).GameEventHandler += OnShowGameScreen;
+        NvpEventBus.Events(GameEvents.OnUIChanged).GameEventHandler += OnShowGameScreen;
     }
 
     private void OnDisable()
     {
-        NvpEventBus.Events(GameEvents.OnShowScreen).GameEventHandler -= OnShowGameScreen;
+        NvpEventBus.Events(GameEvents.OnUIChanged).GameEventHandler -= OnShowGameScreen;
     }
 
 
@@ -41,27 +41,31 @@ public class UIController : MonoBehaviour
     // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void OnShowGameScreen(object sender, EventArgs e)
     {
-        var ea = (OnShowScreenEventArgs)e;
+        var ea = (UiChangedEventArgs)e;
 
-        _titleScreen?.gameObject.SetActive(false);
-        _countDownScreen?.gameObject?.SetActive(false);
-        _playScreen?.gameObject.SetActive(false);
-        _scoreScreen?.gameObject.SetActive(false);
+        _titleScreen.gameObject.SetActive(false);
+        _countDownScreen.gameObject.SetActive(false);
+        _playScreen.gameObject.SetActive(false);
+        _scoreScreen.gameObject.SetActive(false);
+
         switch (ea.Value)
         {
-            case ScreenNames.title:
-                _titleScreen?.gameObject.SetActive(true);
+            case UiNames.title:
+                _titleScreen.gameObject.SetActive(true);
                 break;
-            case ScreenNames.countdown:
 
-                _countDownScreen?.gameObject.SetActive(true);
+            case UiNames.countdown:
+                _countDownScreen.gameObject.SetActive(true);
                 break;
-            case ScreenNames.play:
-                _playScreen?.gameObject.SetActive(true);
+
+            case UiNames.play:
+                _playScreen.gameObject.SetActive(true);
                 break;
-            case ScreenNames.score:
-                _scoreScreen?.gameObject.SetActive(true);
+
+            case UiNames.score:
+                _scoreScreen.gameObject.SetActive(true);
                 break;
+
             default:
                 throw new ArgumentOutOfRangeException();
         }

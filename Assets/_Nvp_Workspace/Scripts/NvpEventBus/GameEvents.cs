@@ -8,6 +8,8 @@
         OnPlayerHitsPipe,
         OnPauseGame,
         OnChangeGameState,
-        OnShowScreen
+        OnUIChanged,
+        OnCountDownValueChanged,
+        OnScoreChanged
     }
 }

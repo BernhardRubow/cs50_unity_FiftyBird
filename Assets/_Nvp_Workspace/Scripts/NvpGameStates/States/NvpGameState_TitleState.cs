@@ -1,7 +1,8 @@
 using nvp.events;
 using UnityEngine;
 
-public class NvpGameState_TitleState : INvpGameState{
+public class NvpGameState_TitleState : INvpGameState
+{
 
     // +++ fields +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private readonly GameObject _birdPrefab;
@@ -25,10 +26,10 @@ public class NvpGameState_TitleState : INvpGameState{
         var bird = Object.Instantiate(_birdPrefab, Vector3.zero, Quaternion.identity);
 
         // request Title screen
-        NvpEventBus.Events(GameEvents.OnShowScreen).TriggerEvent(this, new OnShowScreenEventArgs {Value = ScreenNames.title});
+        NvpEventBus.Events(GameEvents.OnUIChanged).TriggerEvent(this, new UiChangedEventArgs { Value = UiNames.title });
 
         // pause Game
-        NvpEventBus.Events(GameEvents.OnPauseGame).TriggerEvent(this, null);
+        NvpEventBus.Events(GameEvents.OnPauseGame).TriggerEvent(this, new PauseEventArgs { Value = true });
     }
 
     public void Update()

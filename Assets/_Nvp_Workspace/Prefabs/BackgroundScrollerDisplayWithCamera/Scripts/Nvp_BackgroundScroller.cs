@@ -39,20 +39,21 @@ public class Nvp_BackgroundScroller : MonoBehaviour
 
     private void OnEnable()
     {
-        NvpEventBus.Events(GameEvents.OnPauseGame).GameEventHandler += OnPlayerHitsPipe;
+        NvpEventBus.Events(GameEvents.OnPauseGame).GameEventHandler += OnPause;
     }
 
     private void OnDisable()
     {
-        NvpEventBus.Events(GameEvents.OnPauseGame).GameEventHandler -= OnPlayerHitsPipe;
+        NvpEventBus.Events(GameEvents.OnPauseGame).GameEventHandler -= OnPause;
     }
 
 
 
 
     // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    private void OnPlayerHitsPipe(object sender, EventArgs e)
+    private void OnPause(object sender, EventArgs e)
     {
-        _paused = true;
+        var ea = (PauseEventArgs)e;
+        _paused = ea.Value;
     }
 }

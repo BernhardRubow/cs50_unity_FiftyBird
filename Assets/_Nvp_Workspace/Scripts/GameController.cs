@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     // +++ fields ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private NvpStateMachine _nvpStateMachine;
     public GameObject birdPrefab;
+    public int Score;
 
 
 
@@ -25,15 +26,30 @@ public class GameController : MonoBehaviour
             .Build();
 
         _nvpStateMachine.DoStateTransition(NvpGameStatesEnum.Title);
+
+        NvpEventBus.Events(GameEvents.OnPlayerScores).GameEventHandler += OnPlayerScores;
     }
 
     private void OnDisable()
     {
+
+        NvpEventBus.Events(GameEvents.OnPlayerScores).GameEventHandler -= OnPlayerScores;
         _nvpStateMachine.Dispose();
     }
 
     private void Update()
     {
         _nvpStateMachine.Update();
+    }
+
+
+
+
+    // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    private void OnPlayerScores(object sender, EventArgs e)
+    {
+        Score++;
+        NvpEventBus.Events(GameEvents.OnScoreChanged).TriggerEvent(this, new IntEventArgs {Value = Score});
+
     }
 }
