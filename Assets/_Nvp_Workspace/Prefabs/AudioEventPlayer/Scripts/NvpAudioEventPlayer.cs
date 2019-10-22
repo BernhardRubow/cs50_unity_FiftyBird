@@ -41,8 +41,8 @@ public class NvpAudioEventPlayer : MonoBehaviour
     {
         if (_playOnlyOnTime && _played) return;
 
-        var ea = (Vector3EventArgs)e;
-        this.transform.position = ea.Value;
+        var ea = (GenericEventArgs)e;
+        this.transform.position = ea.GetValue<Vector3>();
         _audioEvent.Play(_audioSource);
         _played = true;
     }

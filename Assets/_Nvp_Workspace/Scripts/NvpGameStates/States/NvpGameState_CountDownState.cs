@@ -18,7 +18,7 @@ public class NvpGameState_CountDownState : INvpGameState
         _secondDisplay = 3;
 
         // change ui
-        NvpEventBus.Events(GameEvents.OnUIChanged).TriggerEvent(this, new UiChangedEventArgs {Value = UiNames.countdown});
+        NvpEventBus.Events(GameEvents.OnUIChanged).TriggerEvent(this, new GenericEventArgs(UiNames.countdown));
     }
 
     public void Update()
@@ -31,16 +31,11 @@ public class NvpGameState_CountDownState : INvpGameState
                 _secondDisplay--;
                 _timer = 1f;
 
-                NvpEventBus.Events(GameEvents.OnCountDownValueChanged).TriggerEvent(this, new IntEventArgs {Value = _secondDisplay});
+                NvpEventBus.Events(GameEvents.OnCountDownValueChanged).TriggerEvent(this, new GenericEventArgs(_secondDisplay));
             }
             else
             {
-
-                var ea = new StateTransitionEventArgs()
-                {
-                    Value = NvpGameStatesEnum.Play
-                };
-                NvpEventBus.Events(GameEvents.OnChangeGameState).TriggerEvent(this, ea);
+                NvpEventBus.Events(GameEvents.OnChangeGameState).TriggerEvent(this, new GenericEventArgs(NvpGameStatesEnum.Play));
             }
         }
     }

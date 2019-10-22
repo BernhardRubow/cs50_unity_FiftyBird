@@ -34,7 +34,7 @@ public class NvpBirdController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var ea = new Vector3EventArgs { Value = this.transform.position };
+        var ea = new GenericEventArgs(this.transform.position);
         if (collision.tag == "ScoreTrigger")
         {
             NvpEventBus.Events(GameEvents.OnPlayerScores).TriggerEvent(this, ea);
@@ -43,7 +43,7 @@ public class NvpBirdController : MonoBehaviour
         if (collision.tag == "Pipe")
         {
             NvpEventBus.Events(GameEvents.OnPlayerHitsPipe).TriggerEvent(this, ea);
-            NvpEventBus.Events(GameEvents.OnPauseGame).TriggerEvent(this, new PauseEventArgs { Value = true });
+            NvpEventBus.Events(GameEvents.OnPauseGame).TriggerEvent(this, new GenericEventArgs(true));
         }
     }
 
@@ -61,8 +61,8 @@ public class NvpBirdController : MonoBehaviour
     // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void OnPauseGame(object sender, EventArgs e)
     {
-        var ea = (PauseEventArgs)e;
-        _paused = ea.Value;
+        var ea = (GenericEventArgs)e;
+        _paused = ea.GetValue<bool>();
     }
 
 }

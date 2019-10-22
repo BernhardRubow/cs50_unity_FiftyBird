@@ -49,7 +49,7 @@ public class GameController : MonoBehaviour
     private void OnPlayerScores(object sender, EventArgs e)
     {
         Score++;
-        NvpEventBus.Events(GameEvents.OnScoreChanged).TriggerEvent(this, new IntEventArgs {Value = Score});
+        NvpEventBus.Events(GameEvents.OnScoreChanged).TriggerEvent(this, new GenericEventArgs(Score));
 
     }
 }

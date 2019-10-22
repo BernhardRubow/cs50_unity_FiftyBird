@@ -26,18 +26,17 @@ public class NvpGameState_TitleState : INvpGameState
         var bird = Object.Instantiate(_birdPrefab, Vector3.zero, Quaternion.identity);
 
         // request Title screen
-        NvpEventBus.Events(GameEvents.OnUIChanged).TriggerEvent(this, new UiChangedEventArgs { Value = UiNames.title });
+        NvpEventBus.Events(GameEvents.OnUIChanged).TriggerEvent(this, new GenericEventArgs(UiNames.title));
 
         // pause Game
-        NvpEventBus.Events(GameEvents.OnPauseGame).TriggerEvent(this, new PauseEventArgs { Value = true });
+        NvpEventBus.Events(GameEvents.OnPauseGame).TriggerEvent(this, new GenericEventArgs(true));
     }
 
     public void Update()
     {
         if (Input.GetMouseButtonUp(0))
         {
-            var ea = new StateTransitionEventArgs();
-            ea.Value = NvpGameStatesEnum.CountDown;
+            var ea = new GenericEventArgs(NvpGameStatesEnum.CountDown);
             NvpEventBus.Events(GameEvents.OnChangeGameState).TriggerEvent(this, ea);
         }
     }

@@ -24,7 +24,7 @@ public class PlayScreenController : MonoBehaviour
     // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void OnScoreChanged(object sender, EventArgs e)
     {
-        var ea = (IntEventArgs)e;
-        _scoreText.text = ea.Value.ToString("00");
+        var ea = (GenericEventArgs)e;
+        _scoreText.text = ea.GetValue<int>().ToString("00");
     }
 }

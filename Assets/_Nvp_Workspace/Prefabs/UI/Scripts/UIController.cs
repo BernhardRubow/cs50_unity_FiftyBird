@@ -41,14 +41,14 @@ public class UIController : MonoBehaviour
     // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void OnShowGameScreen(object sender, EventArgs e)
     {
-        var ea = (UiChangedEventArgs)e;
+        var ea = (GenericEventArgs)e;
 
         _titleScreen.gameObject.SetActive(false);
         _countDownScreen.gameObject.SetActive(false);
         _playScreen.gameObject.SetActive(false);
         _scoreScreen.gameObject.SetActive(false);
 
-        switch (ea.Value)
+        switch (ea.GetValue<UiNames>())
         {
             case UiNames.title:
                 _titleScreen.gameObject.SetActive(true);

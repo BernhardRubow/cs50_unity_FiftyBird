@@ -35,8 +35,8 @@ public class NvpStateMachine : System.IDisposable {
     //// +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void OnGameStateChanged(object sender, EventArgs e)
     {
-        var ea = (StateTransitionEventArgs)e;
-        DoStateTransition(ea.Value);
+        var ea = (GenericEventArgs)e;
+        DoStateTransition(ea.GetValue<NvpGameStatesEnum>());
     }
 
     

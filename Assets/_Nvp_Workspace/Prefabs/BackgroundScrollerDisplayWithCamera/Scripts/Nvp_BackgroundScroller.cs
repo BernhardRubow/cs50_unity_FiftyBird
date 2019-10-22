@@ -53,7 +53,7 @@ public class Nvp_BackgroundScroller : MonoBehaviour
     // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void OnPause(object sender, EventArgs e)
     {
-        var ea = (PauseEventArgs)e;
-        _paused = ea.Value;
+        var ea = (GenericEventArgs)e;
+        _paused = ea.GetValue<bool>();
     }
 }

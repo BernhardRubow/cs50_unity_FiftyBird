@@ -54,8 +54,8 @@ public class PipeSpawningSystemController : MonoBehaviour
 
     private void OnPause(object sender, EventArgs e)
     {
-        var ea = (PauseEventArgs)e;
-        _paused = ea.Value;
+        var ea = (GenericEventArgs)e;
+        _paused = ea.GetValue<bool>();
     }
 
 

@@ -39,7 +39,7 @@ public class CountDownScreenController : MonoBehaviour
     // +++ event handler ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     private void OnCountDownValueChanged(object sender, EventArgs e)
     {
-        var ea = (IntEventArgs) e;
-        _countdownDisplayText.text = $"- {ea.Value} -";
+        var ea = (GenericEventArgs) e;
+        _countdownDisplayText.text = $"- {ea.GetValue<int>()} -";
     }
 }
