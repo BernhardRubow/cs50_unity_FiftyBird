@@ -7,14 +7,13 @@ public class NvpAudioEventPlayer : MonoBehaviour
 {
     // +++ fields +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     [SerializeField] private NvpAudioEvent _audioEvent;
-    [SerializeField] private AudioSource _audioSource;
     [SerializeField] private GameEvents _subscribedAudioEvent;
     [SerializeField] private bool _playOnlyOnTime;
 
     private bool _played;
+    private AudioSource _audioSource;
 
 
-    
 
 
     // +++ life cycle +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

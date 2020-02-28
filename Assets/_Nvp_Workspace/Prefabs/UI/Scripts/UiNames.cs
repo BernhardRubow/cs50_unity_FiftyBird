@@ -3,5 +3,6 @@
     title,
     countdown,
     play,
-    score
+    score,
+    gameover
 }

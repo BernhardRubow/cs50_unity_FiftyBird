@@ -50,11 +50,13 @@ public class NvpBirdController : MonoBehaviour
     private void OnEnable()
     {
         NvpEventBus.Events(GameEvents.OnPauseGame).GameEventHandler += OnPauseGame;
+        NvpEventBus.Events(GameEvents.OnPlayerHitsPipe).GameEventHandler += OnBirdKilled;
     }
 
     private void OnDisable()
     {
         NvpEventBus.Events(GameEvents.OnPauseGame).GameEventHandler -= OnPauseGame;
+        NvpEventBus.Events(GameEvents.OnPlayerHitsPipe).GameEventHandler -= OnBirdKilled;
     }
 
 
@@ -64,5 +66,12 @@ public class NvpBirdController : MonoBehaviour
         var ea = (GenericEventArgs)e;
         _paused = ea.GetValue<bool>();
     }
+
+    private void OnBirdKilled(object sender, EventArgs e)
+    {
+        Destroy(this.gameObject);
+    }
+
+
 
 }

@@ -3,5 +3,6 @@ public enum NvpGameStatesEnum {
     Title,
     CountDown,
     Play,
-    Score
+    Score,
+    GameOver
 }

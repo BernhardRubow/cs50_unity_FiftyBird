@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private Canvas _countDownScreen;
     [SerializeField] private Canvas _playScreen;
     [SerializeField] private Canvas _scoreScreen;
+    [SerializeField] private Canvas _gameOverScreen;
 
 
 
@@ -47,6 +48,7 @@ public class UIController : MonoBehaviour
         _countDownScreen.gameObject.SetActive(false);
         _playScreen.gameObject.SetActive(false);
         _scoreScreen.gameObject.SetActive(false);
+        _gameOverScreen.gameObject.SetActive(false);
 
         switch (ea.GetValue<UiNames>())
         {
@@ -64,6 +66,10 @@ public class UIController : MonoBehaviour
 
             case UiNames.score:
                 _scoreScreen.gameObject.SetActive(true);
+                break;
+
+            case UiNames.gameover:
+                _gameOverScreen.gameObject.SetActive(true);
                 break;
 
             default:

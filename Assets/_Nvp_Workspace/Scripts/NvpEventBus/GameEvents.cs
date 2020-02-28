@@ -10,6 +10,7 @@
         OnChangeGameState,
         OnUIChanged,
         OnCountDownValueChanged,
-        OnScoreChanged
+        OnScoreChanged,
+        OnGameOverFinished
     }
 }

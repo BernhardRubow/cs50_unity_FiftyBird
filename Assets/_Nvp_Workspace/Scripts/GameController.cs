@@ -23,17 +23,22 @@ public class GameController : MonoBehaviour
             .AddGameState(NvpGameStatesEnum.CountDown, new NvpGameState_CountDownState())
             .AddGameState(NvpGameStatesEnum.Play, new NvpGameState_PlayState())
             .AddGameState(NvpGameStatesEnum.Score, new NvpGameState_ScoreState())
+            .AddGameState(NvpGameStatesEnum.GameOver, new NvpGameState_GameOverState())
             .Build();
 
         _nvpStateMachine.DoStateTransition(NvpGameStatesEnum.Title);
 
         NvpEventBus.Events(GameEvents.OnPlayerScores).GameEventHandler += OnPlayerScores;
+        NvpEventBus.Events(GameEvents.OnPlayerHitsPipe).GameEventHandler += OnPlayerHitsPipe;
+        NvpEventBus.Events(GameEvents.OnGameOverFinished).GameEventHandler += OnGameOverFinished;
     }
 
     private void OnDisable()
     {
 
         NvpEventBus.Events(GameEvents.OnPlayerScores).GameEventHandler -= OnPlayerScores;
+        NvpEventBus.Events(GameEvents.OnPlayerHitsPipe).GameEventHandler -= OnPlayerHitsPipe;
+        NvpEventBus.Events(GameEvents.OnGameOverFinished).GameEventHandler -= OnGameOverFinished;
         _nvpStateMachine.Dispose();
     }
 
@@ -50,6 +55,17 @@ public class GameController : MonoBehaviour
     {
         Score++;
         NvpEventBus.Events(GameEvents.OnScoreChanged).TriggerEvent(this, new GenericEventArgs(Score));
+    }
 
+    private void OnPlayerHitsPipe(object sender, EventArgs e)
+    {
+        var stateTransitionEventArgs = new GenericEventArgs(NvpGameStatesEnum.GameOver);
+        NvpEventBus.Events(GameEvents.OnChangeGameState).TriggerEvent(this, stateTransitionEventArgs);
+    }
+
+    private void OnGameOverFinished(object sender, EventArgs e)
+    {
+        var stateTransitionEventArgs = new GenericEventArgs(NvpGameStatesEnum.Title);
+        NvpEventBus.Events(GameEvents.OnChangeGameState).TriggerEvent(this, stateTransitionEventArgs);
     }
 }

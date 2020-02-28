@@ -28,13 +28,15 @@ public class NvpGameState_CountDownState : INvpGameState
         {
             if (_secondDisplay > 0)
             {
+                Debug.Log("Display Countdown:" + _secondDisplay);
+                NvpEventBus.Events(GameEvents.OnCountDownValueChanged).TriggerEvent(this, new GenericEventArgs(_secondDisplay));
+
                 _secondDisplay--;
                 _timer = 1f;
-
-                NvpEventBus.Events(GameEvents.OnCountDownValueChanged).TriggerEvent(this, new GenericEventArgs(_secondDisplay));
             }
             else
             {
+                NvpEventBus.Events(GameEvents.OnCountDownValueChanged).TriggerEvent(this, new GenericEventArgs(3));
                 NvpEventBus.Events(GameEvents.OnChangeGameState).TriggerEvent(this, new GenericEventArgs(NvpGameStatesEnum.Play));
             }
         }
@@ -42,6 +44,6 @@ public class NvpGameState_CountDownState : INvpGameState
 
     public void Exit()
     {
-        // do nothing
+        
     }
 }
