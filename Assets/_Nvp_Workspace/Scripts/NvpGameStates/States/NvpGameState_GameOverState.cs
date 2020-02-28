@@ -9,6 +9,9 @@ public class NvpGameState_GameOverState : INvpGameState
     {
 
         Debug.Log("Enter Game Over State");
+
+        var ea = new GenericEventArgs(UiNames.gameover);
+        NvpEventBus.Events(GameEvents.OnUIChanged).TriggerEvent(this, ea);
         timer = 0;
     }
 
@@ -16,7 +19,7 @@ public class NvpGameState_GameOverState : INvpGameState
     {
         timer += Time.deltaTime;
 
-        if (timer > 10 || Input.GetMouseButtonUp(0))
+        if (timer > 10 || Input.GetMouseButtonUp(1))
         {
             NvpEventBus.Events(GameEvents.OnGameOverFinished).TriggerEvent(this, null);
         }

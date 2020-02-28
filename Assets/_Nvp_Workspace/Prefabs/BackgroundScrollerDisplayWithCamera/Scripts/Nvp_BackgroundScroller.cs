@@ -30,7 +30,7 @@ public class Nvp_BackgroundScroller : MonoBehaviour
     {
         if (_paused) return;
 
-        _offsetBackground.x = Time.time * _scrollSpeedBackground;
+        _offsetBackground.x += Time.deltaTime * _scrollSpeedBackground;
         _backgroundPlaneRenderer.material.SetTextureOffset("_MainTex", _offsetBackground);
 
         _offsetGround.x = Time.time * _scrollSpeedGround;

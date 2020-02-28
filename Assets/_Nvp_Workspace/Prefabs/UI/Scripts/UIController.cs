@@ -29,6 +29,7 @@ public class UIController : MonoBehaviour
     private void OnEnable()
     {
         NvpEventBus.Events(GameEvents.OnUIChanged).GameEventHandler += OnShowGameScreen;
+        
     }
 
     private void OnDisable()

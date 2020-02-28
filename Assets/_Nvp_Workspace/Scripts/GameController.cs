@@ -65,6 +65,10 @@ public class GameController : MonoBehaviour
 
     private void OnGameOverFinished(object sender, EventArgs e)
     {
+        Score = 0;
+
+        NvpEventBus.Events(GameEvents.OnResetPipes).TriggerEvent(this, null);
+
         var stateTransitionEventArgs = new GenericEventArgs(NvpGameStatesEnum.Title);
         NvpEventBus.Events(GameEvents.OnChangeGameState).TriggerEvent(this, stateTransitionEventArgs);
     }

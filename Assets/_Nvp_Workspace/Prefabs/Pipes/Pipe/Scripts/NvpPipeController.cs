@@ -37,17 +37,20 @@ public class NvpPipeController : MonoBehaviour, IPoolItem
     private void OnEnable()
     {
         NvpEventBus.Events(GameEvents.OnPauseGame).GameEventHandler += OnPause;
+        NvpEventBus.Events(GameEvents.OnResetPipes).GameEventHandler += OnResetPipes;
     }
 
     private void OnDisable()
     {
         NvpEventBus.Events(GameEvents.OnPauseGame).GameEventHandler -= OnPause;
+        NvpEventBus.Events(GameEvents.OnResetPipes).GameEventHandler -= OnResetPipes;
     }
 
 
     // +++ IPoolItem implementation +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     public void SetReturnAction(Action<GameObject> returnToPoolAction)
     {
+        _paused = false;
         if (_returnToPoolAction == null) _returnToPoolAction = returnToPoolAction;
     }
 
@@ -59,6 +62,11 @@ public class NvpPipeController : MonoBehaviour, IPoolItem
     {
         var ea = (GenericEventArgs)e;
         _paused = ea.GetValue<bool>();
+    }
+
+    private void OnResetPipes(object sender, EventArgs e)
+    {
+        _returnToPoolAction(this.gameObject);
     }
 
 

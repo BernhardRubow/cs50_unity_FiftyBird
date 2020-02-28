@@ -11,6 +11,7 @@
         OnUIChanged,
         OnCountDownValueChanged,
         OnScoreChanged,
-        OnGameOverFinished
+        OnGameOverFinished,
+        OnResetPipes
     }
 }

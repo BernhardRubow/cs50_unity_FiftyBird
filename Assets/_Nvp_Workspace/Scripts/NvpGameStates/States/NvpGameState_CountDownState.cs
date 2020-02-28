@@ -28,11 +28,12 @@ public class NvpGameState_CountDownState : INvpGameState
         {
             if (_secondDisplay > 0)
             {
+                _secondDisplay--;
+                _timer = 1f;
+
                 Debug.Log("Display Countdown:" + _secondDisplay);
                 NvpEventBus.Events(GameEvents.OnCountDownValueChanged).TriggerEvent(this, new GenericEventArgs(_secondDisplay));
 
-                _secondDisplay--;
-                _timer = 1f;
             }
             else
             {
